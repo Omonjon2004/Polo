@@ -1,4 +1,5 @@
 from django.contrib.postgres.search import TrigramSimilarity
+
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics
@@ -25,7 +26,8 @@ class BagListCreateAPIView(generics.ListCreateAPIView):
         if color:
             queryset = queryset.annotate(sim=TrigramSimilarity('color', color)).filter(sim__gte=0.2).order_by('sim')
         if category:
-            queryset = queryset.annotate(sim=TrigramSimilarity('category', category)).filter(sim__gte=0.2).order_by('sim')
+            queryset = queryset.annotate(sim=TrigramSimilarity('category', category)).filter(sim__gte=0.2).order_by(
+                'sim')
         if name:
             queryset = queryset.annotate(sim=TrigramSimilarity('name', name)).filter(sim__gte=0.2).order_by('sim')
         if gender:

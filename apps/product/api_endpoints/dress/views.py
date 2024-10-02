@@ -29,7 +29,8 @@ class DressListCreateAPIView(ListCreateAPIView):
         if size:
             queryset = queryset.annotate(sim=TrigramSimilarity('size', size)).filter(sim__gte=0.2).order_by('sim')
         if category:
-            queryset = queryset.annotate(sim=TrigramSimilarity('category', category)).filter(sim__gte=0.2).order_by('sim')
+            queryset = queryset.annotate(sim=TrigramSimilarity('category', category)).filter(sim__gte=0.2).order_by(
+                'sim')
         if name:
             queryset = queryset.annotate(sim=TrigramSimilarity('name', name)).filter(sim__gte=0.2).order_by('sim')
         if gender:
@@ -50,7 +51,7 @@ class DressListCreateAPIView(ListCreateAPIView):
             openapi.Parameter("gender", openapi.IN_QUERY, description="Filter by gender", type=openapi.TYPE_STRING),
             openapi.Parameter("season", openapi.IN_QUERY, description="Filter by season", type=openapi.TYPE_STRING),
             openapi.Parameter("price", openapi.IN_QUERY, description="Filter by price", type=openapi.TYPE_STRING),
-            ]
+        ]
     )
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
