@@ -3,14 +3,13 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
-from apps.product.models import Shoes
-from apps.product.api_endpoints.shoes.serializers import ShoesSerializer
+from apps.product.api_endpoints.jewelry.serializers import JewelrySerializer
+from apps.product.models import Jewelry
 
 
-# Create your views here.
-class ShoesListCreateAPIView(ListCreateAPIView):
-    serializer_class = ShoesSerializer
-    queryset = Shoes.objects.all()
+class JewelryListCreateAPIView(ListCreateAPIView):
+    serializer_class = JewelrySerializer
+    queryset = Jewelry.objects.all()
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -20,7 +19,7 @@ class ShoesListCreateAPIView(ListCreateAPIView):
         category = self.request.query_params.get('category')
         name = self.request.query_params.get('name')
         gender = self.request.query_params.get('gender')
-        season = self.request.query_params.get('season')
+        weight = self.request.query_params.get('weight')
         price = self.request.query_params.get('price')
 
         if brand:
@@ -35,8 +34,8 @@ class ShoesListCreateAPIView(ListCreateAPIView):
             queryset = queryset.annotate(sim=TrigramSimilarity('name', size)).filter(sim__gte=0.2).order_by('sim')
         if gender:
             queryset = queryset.annotate(sim=TrigramSimilarity('gender', size)).filter(sim__gte=0.2).order_by('sim')
-        if season:
-            queryset = queryset.annotate(sim=TrigramSimilarity('season', size)).filter(sim__gte=0.2).order_by('sim')
+        if weight:
+            queryset = queryset.annotate(sim=TrigramSimilarity('weight', size)).filter(sim__gte=0.2).order_by('sim')
         if price:
             queryset = queryset.annotate(sim=TrigramSimilarity('price', size)).filter(sim__gte=0.2).order_by('sim')
         return queryset
@@ -48,15 +47,17 @@ class ShoesListCreateAPIView(ListCreateAPIView):
                            openapi.Parameter("category", openapi.IN_QUERY, description="Filter by category",type=openapi.TYPE_STRING),
                            openapi.Parameter("name", openapi.IN_QUERY, description="Filter by name",type=openapi.TYPE_STRING),
                            openapi.Parameter("gender", openapi.IN_QUERY, description="Filter by gender",type=openapi.TYPE_STRING),
-                           openapi.Parameter("season", openapi.IN_QUERY, description="Filter by season",type=openapi.TYPE_STRING),
-                           openapi.Parameter("price", openapi.IN_QUERY, description="Filter by price",type=openapi.TYPE_STRING),
+                           openapi.Parameter("weight", openapi.IN_QUERY, description="Filter by weight",type=openapi.TYPE_NUMBER),
+                           openapi.Parameter("price", openapi.IN_QUERY, description="Filter by price",type=openapi.TYPE_NUMBER),
                            ]
     )
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
 
-class ShoesRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-    serializer_class = ShoesSerializer
-    queryset = Shoes.objects.all()
+class JewelryRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    serializer_class = JewelrySerializer
+    queryset = Jewelry.objects.all()
+__all__ = ['JewelryListCreateAPIView', 'JewelryRetrieveUpdateDestroyAPIView']
 
-__all__=['ShoesListCreateAPIView', 'ShoesRetrieveUpdateDestroyAPIView']
+
+

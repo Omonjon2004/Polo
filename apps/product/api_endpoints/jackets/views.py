@@ -3,14 +3,14 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
-from apps.product.models import Shoes
-from apps.product.api_endpoints.shoes.serializers import ShoesSerializer
+
+from apps.product.api_endpoints.jackets.serializers import JacketsSerializer
+from apps.product.models import Jackets
 
 
-# Create your views here.
-class ShoesListCreateAPIView(ListCreateAPIView):
-    serializer_class = ShoesSerializer
-    queryset = Shoes.objects.all()
+class JacketsListCreateAPIView(ListCreateAPIView):
+    serializer_class = JacketsSerializer
+    queryset = Jackets.objects.all()
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -55,8 +55,11 @@ class ShoesListCreateAPIView(ListCreateAPIView):
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
 
-class ShoesRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-    serializer_class = ShoesSerializer
-    queryset = Shoes.objects.all()
+class JacketsRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+     serializer_class = JacketsSerializer
+     queryset = Jackets.objects.all()
 
-__all__=['ShoesListCreateAPIView', 'ShoesRetrieveUpdateDestroyAPIView']
+__all__ = ['JacketsListCreateAPIView','JacketsRetrieveUpdateDestroyAPIView']
+
+
+
