@@ -1,0 +1,24 @@
+mig:
+	python3 manage.py makemigrations
+	python3 manage.py migrate
+
+user:
+	python3 manage.py createsuperuser --username $(username)
+    # make user username=your_username
+sort:
+	black .
+	isort .
+
+req:
+	pip freeze > requirements.txt
+
+app:
+	python3 manage.py startapp $(name)
+    # make app name=mynewapp
+shell:
+	python manage.py shell
+ist:
+	pip install $(name)
+	#make ins name=install_name
+test:
+	python3 manage.py test
