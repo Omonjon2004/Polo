@@ -30,15 +30,15 @@ class ShoesListCreateAPIView(ListCreateAPIView):
         if size:
             queryset = queryset.annotate(sim=TrigramSimilarity('size', size)).filter(sim__gte=0.2).order_by('sim')
         if category:
-            queryset = queryset.annotate(sim=TrigramSimilarity('category', size)).filter(sim__gte=0.2).order_by('sim')
+            queryset = queryset.annotate(sim=TrigramSimilarity('category', category)).filter(sim__gte=0.2).order_by('sim')
         if name:
-            queryset = queryset.annotate(sim=TrigramSimilarity('name', size)).filter(sim__gte=0.2).order_by('sim')
+            queryset = queryset.annotate(sim=TrigramSimilarity('name', name)).filter(sim__gte=0.2).order_by('sim')
         if gender:
-            queryset = queryset.annotate(sim=TrigramSimilarity('gender', size)).filter(sim__gte=0.2).order_by('sim')
+            queryset = queryset.annotate(sim=TrigramSimilarity('gender', gender)).filter(sim__gte=0.2).order_by('sim')
         if season:
-            queryset = queryset.annotate(sim=TrigramSimilarity('season', size)).filter(sim__gte=0.2).order_by('sim')
+            queryset = queryset.annotate(sim=TrigramSimilarity('season', season)).filter(sim__gte=0.2).order_by('sim')
         if price:
-            queryset = queryset.annotate(sim=TrigramSimilarity('price', size)).filter(sim__gte=0.2).order_by('sim')
+            queryset = queryset.annotate(sim=TrigramSimilarity('price', price)).filter(sim__gte=0.2).order_by('sim')
         return queryset
 
     @swagger_auto_schema(

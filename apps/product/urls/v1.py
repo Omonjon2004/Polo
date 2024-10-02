@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.product.api_endpoints import shoes, dress, jewelry, jackets
+from apps.product.api_endpoints import shoes, dress, jewelry, jackets, electrical, bag
 
 urlpatterns = [
     path('shoes/', shoes.ShoesListCreateAPIView.as_view(), name='shoes'),
@@ -10,7 +10,12 @@ urlpatterns = [
 
     path('jewelry/', jewelry.JewelryListCreateAPIView.as_view(), name='jewelry'),
     path('jewelry/<int:pk>/', jewelry.JewelryRetrieveUpdateDestroyAPIView.as_view(), name='jewelry-detail'),
-path('jackets/', jackets.JacketsListCreateAPIView.as_view(), name='jackets'),
+    path('jackets/', jackets.JacketsListCreateAPIView.as_view(), name='jackets'),
     path('jackets/<int:pk>/', jackets.JacketsRetrieveUpdateDestroyAPIView.as_view(), name='jackets-detail'),
+    path('electrical/', electrical.ElectricalListCreateAPIView.as_view(), name='electrical'),
+    path('electrical/<int:pk>/', electrical.ElectricalRetrieveUpdateDestroyAPIView.as_view(), name='electrical-detail'),
+
+    path('bag/', bag.BagListCreateAPIView.as_view(), name='bag'),
+    path('bag/<int:pk>/', bag.BagRetrieveUpdateDestroyAPIView.as_view(), name='bag-detail'),
 
 ]
