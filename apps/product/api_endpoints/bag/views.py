@@ -2,7 +2,7 @@ from django.contrib.postgres.search import TrigramSimilarity
 
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import generics
+from rest_framework import generics, filters
 
 from apps.product.api_endpoints.bag.serializers import BagSerializer
 from apps.product.models import Bags
