@@ -216,17 +216,61 @@ Bags_name_List = [
     ('Bucket Bag', 'Bucket Bag'),         # Qop shaklida sumka
     ('Gym Bag', 'Gym Bag'),           # Sport zaliga mo'ljallangan sumka
 ]
+Jackets_Brand_List = [
+    ('north_face', 'North Face'),
+    ('patagonia', 'Patagonia'),
+    ('columbia', 'Columbia'),
+    ('canada_goose', 'Canada Goose'),
+    ('moncler', 'Moncler'),
+]
 
-Jackets_Brand_List = []
 
-Jackets_Category_list = []
+Jackets_Category_list = [
+    ('winter', 'Winter Jacket'),
+    ('rain', 'Rain Jacket'),
+    ('leather', 'Leather Jacket'),
+    ('bomber', 'Bomber Jacket'),
+    ('puffer', 'Puffer Jacket'),
+]
 
-Electrical_Brand_List = []
 
-Electrical_Category_list = []
+Electrical_Brand_List = [
+    ('samsung', 'Samsung'),
+    ('lg', 'LG'),
+    ('sony', 'Sony'),
+    ('philips', 'Philips'),
+    ('bosch', 'Bosch'),
+]
 
-Jewelry_name_List = []
+Electrical_Category_list = [
+    ('tv', 'Television'),
+    ('washing_machine', 'Washing Machine'),
+    ('refrigerator', 'Refrigerator'),
+    ('microwave', 'Microwave'),
+    ('air_conditioner', 'Air Conditioner'),
+]
 
-Jackets_name_List = []
+Jewelry_name_List = [
+    ('necklace', 'Necklace'),
+    ('earrings', 'Earrings'),
+    ('bracelet', 'Bracelet'),
+    ('ring', 'Ring'),
+    ('pendant', 'Pendant'),
+]
 
-Electrical_name_List = []
+Jackets_name_List = [
+    ('alpine', 'Alpine Jacket'),
+    ('windbreaker', 'Windbreaker'),
+    ('parka', 'Parka'),
+    ('denim', 'Denim Jacket'),
+    ('down', 'Down Jacket'),
+]
+
+
+Electrical_name_List = [
+    ('led_tv', 'LED TV'),
+    ('smart_fridge', 'Smart Refrigerator'),
+    ('top_washing_machine', 'Top-load Washing Machine'),
+    ('convection_microwave', 'Convection Microwave'),
+    ('portable_ac', 'Portable Air Conditioner'),
+]
