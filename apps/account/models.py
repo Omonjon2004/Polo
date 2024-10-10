@@ -24,3 +24,10 @@ class UsersCards(TimeStampedModel):
     card_token = models.CharField(max_length=255)
     cvv = models.IntegerField()
     account = models.ForeignKey(to=Users, on_delete=models.SET_NULL, null=True)
+
+
+class CompanyCards(TimeStampedModel):
+    card_number = models.CharField(max_length=255, unique=True)
+    expiration_date = models.DateField()
+    cvv = models.IntegerField()
+    account = models.ForeignKey(to=Users, on_delete=models.SET_NULL, null=True)
