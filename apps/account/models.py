@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 from apps.product.choices import Gender_List
 from apps.shared.models import TimeStampedModel
@@ -9,7 +10,6 @@ from apps.shared.models import TimeStampedModel
 
 
 class Users(AbstractUser):
-    phone_number = models.CharField(max_length=20, unique=True)
     avatar = models.ImageField(upload_to='avatars/')
     gender = models.CharField(choices=Gender_List, max_length=20)
     email = models.EmailField(unique=True)

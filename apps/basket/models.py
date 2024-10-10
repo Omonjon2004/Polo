@@ -7,7 +7,7 @@ from apps.product.models import Bags, Shoes, Dress, Jewelry
 
 
 class Basket(models.Model):
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.OneToOneField(Users, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
 class BasketItem(models.Model):
