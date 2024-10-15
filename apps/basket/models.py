@@ -10,6 +10,11 @@ class Basket(models.Model):
     user = models.OneToOneField(Users, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def total_price(self):
+        total = sum(item.get_product_price() * item.quantity for item in self.items.all())
+        return total
+
+
 class BasketItem(models.Model):
     basket = models.ForeignKey(Basket, related_name='items', on_delete=models.CASCADE)
     bag = models.ForeignKey(Bags, null=True, blank=True, on_delete=models.CASCADE)
@@ -24,11 +29,11 @@ class BasketItem(models.Model):
 
     def get_product(self):
         if self.bag:
-            return self.bag
+            return self.bag.price
         elif self.shoes:
-            return self.shoes
+            return self.shoes.price
         elif self.dress:
-            return self.dress
+            return self.dress.price
         elif self.jewelry:
-            return self.jewelry
+            return self.jewelry.price
         return None
