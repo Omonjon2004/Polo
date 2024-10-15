@@ -17,4 +17,6 @@ urlpatterns = [
     path('send-code/', activation.SendActivationCodeView.as_view()),
     path('verify-code/', activation.VerificationCodeView.as_view()),
     path('add-card/', user_card.AddCardView.as_view()),
+    path('delete-card/', user_card.DeleteCardView.as_view()),
+    path('card-list/', user_card.CardListView.as_view()),
 ]

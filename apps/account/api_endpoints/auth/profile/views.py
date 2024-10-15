@@ -30,9 +30,8 @@ class ProfileViewSet(viewsets.ViewSet):
         serializer.is_valid(raise_exception=True)
         if 'email' in serializer.validated_data and serializer.validated_data['email'] != original_email:
             account.is_active = False
-
         serializer.save()
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
         account = get_object_or_404(Users, pk=self.request.user.id)
@@ -48,9 +47,4 @@ class ProfileViewSet(viewsets.ViewSet):
         account.is_active = False
         account.save()
         return Response(status=status.HTTP_200_OK)
-
-
-
-
-
 __all__ = ["ProfileViewSet",]
