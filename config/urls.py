@@ -23,6 +23,7 @@ from .swagger import swagger_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('apps.product.urls.v1')),
+    path("api/account/v1/", include("apps.account.urls.v1")),
 ]
 urlpatterns += swagger_urlpatterns
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
