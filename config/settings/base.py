@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
+from urllib.parse import urlparse
 
 from django.conf.global_settings import AUTH_USER_MODEL
 from dotenv import load_dotenv
@@ -93,16 +94,34 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('DB_NAME'),
-        'PORT': os.getenv("DB_PORT"),
-        'HOST': os.getenv("DB_HOST"),
-        'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_PASS"),
+if os.getenv('USE_SLS_DB')=='True':
+    tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': tmpPostgres.path.replace('/', ''),
+            'USER': tmpPostgres.username,
+            'PASSWORD': tmpPostgres.password,
+            'HOST': tmpPostgres.hostname,
+            'PORT': 5432,
+        }
     }
-}
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.getenv('DB_NAME'),
+            'PORT': os.getenv("DB_PORT"),
+            'HOST': os.getenv("DB_HOST"),
+            'USER': os.getenv("DB_USER"),
+            'PASSWORD': os.getenv("DB_PASS"),
+        }
+    }
+
+
+
 
 
 # Password validation
@@ -141,9 +160,46 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-STATIC_ROOT = BASE_DIR / 'static'
+
+
+
+USE_S3 = os.getenv("USE_S3") == 'True'
+
+
+# Agar S3 dan foydalanilsa
+
+if USE_S3 :
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+            "OPTIONS": {
+                "access_key": os.getenv("AWS_ACCESS_KEY_ID"),
+                "secret_key": os.getenv("AWS_SECRET_ACCESS_KEY"),
+                "region_name": os.getenv("S3_REGION"),  # e.g., "us-east-1"
+                "bucket_name": os.getenv("BUCKET_NAME"),
+            },
+        },
+        "staticfiles": {  # For static files
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+            "OPTIONS": {
+                "access_key": os.getenv("AWS_ACCESS_KEY_ID"),
+                "secret_key": os.getenv("AWS_SECRET_ACCESS_KEY"),
+                "region_name": os.getenv("S3_REGION"),  # e.g., "us-east-1"
+                "bucket_name": os.getenv("BUCKET_NAME"),
+                "location": "static",  # Specify a folder within your bucket
+            },
+        },
+    }
+
+    DEFAULT_FILE_STORAGE = "config.settings.storages.default"  # Replace "config.settings" with your actual settings path
+    STATICFILES_STORAGE = "config.settings.storages.staticfiles"
+
+else:
+
+    STATIC_ROOT = BASE_DIR / 'static/'
+
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media/'
 
 
 # Default primary key field type

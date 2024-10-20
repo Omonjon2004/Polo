@@ -2,6 +2,7 @@ from django.contrib.postgres.search import TrigramSimilarity
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from apps.product.api_endpoints.electrical.serializers import ElectricalSerializer
 from apps.product.models import Electrical
@@ -10,6 +11,11 @@ from apps.product.models import Electrical
 class ElectricalListCreateAPIView(generics.ListCreateAPIView):
     queryset = Electrical.objects.all()
     serializer_class = ElectricalSerializer
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
     def get_queryset(self):
         queryset = super().get_queryset()

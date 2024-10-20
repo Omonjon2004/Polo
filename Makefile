@@ -9,8 +9,8 @@ sort:
 	black .
 	isort .
 
-req:
-	pip freeze > requirements.txt
+base:
+	pip freeze > base.txt
 
 app:
 	python3 manage.py startapp $(name)

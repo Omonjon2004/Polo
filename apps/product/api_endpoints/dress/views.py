@@ -2,6 +2,7 @@ from django.contrib.postgres.search import TrigramSimilarity
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from apps.product.api_endpoints.dress.serializers import DressSerializer
 from apps.product.models import Dress
@@ -10,6 +11,11 @@ from apps.product.models import Dress
 class DressListCreateAPIView(ListCreateAPIView):
     serializer_class = DressSerializer
     queryset = Dress.objects.all()
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
     def get_queryset(self):
         queryset = super().get_queryset()
