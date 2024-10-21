@@ -1,2 +1,2 @@
-from .SendActivationCode import *
-from .VerificationCode import *
+from .SendActivationCode import * # noqa
+from .VerificationCode import *   # noqa

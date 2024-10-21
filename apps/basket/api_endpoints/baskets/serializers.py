@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from apps.basket.api_endpoints.basket_item.serializers import BasketItemSerializer
+from apps.basket.api_endpoints.basket_item.serializers \
+    import BasketItemSerializer
 from apps.basket.models import Basket
 
 
@@ -9,4 +10,8 @@ class BasketSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Basket
-        fields = ['id', 'user', 'created_at', 'items', 'total_price']
+        fields = ['id',
+                  'user',
+                  'created_at',
+                  'items',
+                  'total_price']

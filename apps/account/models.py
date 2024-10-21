@@ -8,7 +8,8 @@ from apps.shared.models import TimeStampedModel
 class Users(AbstractUser):
     phone_number = models.CharField(max_length=20, unique=True)
     is_active = models.BooleanField(default=False)
-    avatar = models.ImageField(upload_to="avatars/", null=True, blank=True, default=None)
+    avatar = models.ImageField(upload_to="avatars/",
+                               null=True, blank=True, default=None)
     gender = models.CharField(choices=Gender_List, max_length=20)
     email = models.EmailField(unique=True)
     USERNAME_FIELD = 'email'
@@ -19,8 +20,8 @@ class Users(AbstractUser):
 
 
 class UsersCards(TimeStampedModel):
-    card_name  = models.CharField(max_length=50)
-    card_number =models.CharField(
+    card_name = models.CharField(max_length=50)
+    card_number = models.CharField(
         max_length=16,
         unique=True,
         validators=[
@@ -48,4 +49,5 @@ class UsersCards(TimeStampedModel):
             )
         ]
     )
-    account = models.ForeignKey(to=Users,on_delete=models.CASCADE,related_name='cards')
+    account = models.ForeignKey(to=Users,
+                                on_delete=models.CASCADE, related_name='cards')

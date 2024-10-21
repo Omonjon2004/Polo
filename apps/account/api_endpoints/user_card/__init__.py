@@ -1,1 +1,1 @@
-from .add_card import *
+from .add_card import * # noqa F401

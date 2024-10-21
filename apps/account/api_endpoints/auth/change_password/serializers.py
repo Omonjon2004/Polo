@@ -13,15 +13,18 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
         model = Users
         fields = ('old_password', 'new_password', 'confirm_new_password')
 
-
     def old_password_validator(self, value):
         user = self.context['request'].user
         if not user.check_password(value):
-            raise serializers.ValidationError("Your account password is incorrect")
+            raise (
+                serializers.ValidationError
+                ("Your account password is incorrect"))
         return value
-
 
     def validate(self, attrs):
         if attrs['new_password'] != attrs['confirm_new_password']:
-            raise serializers.ValidationError("Your new password and confirm password do not match")
+            raise (
+                serializers.ValidationError(
+                    "Your new password and confirm password do not match"
+                ))
         return attrs

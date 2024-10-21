@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 
-from apps.basket.api_endpoints.basket_item.serializers import BasketItemSerializer
+from apps.basket.api_endpoints.basket_item.serializers \
+    import BasketItemSerializer
 from apps.basket.models import BasketItem
 
 

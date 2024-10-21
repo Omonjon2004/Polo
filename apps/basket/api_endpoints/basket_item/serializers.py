@@ -6,5 +6,10 @@ from apps.basket.models import BasketItem
 class BasketItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = BasketItem
-        fields = ['id', 'bag', 'shoes', 'dress', 'jewelry', 'quantity', 'added_at']
-
+        fields = ['id',
+                  'bag',
+                  'shoes',
+                  'dress',
+                  'jewelry',
+                  'quantity',
+                  'added_at']

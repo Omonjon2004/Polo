@@ -1,5 +1,5 @@
-from .Login import *
-from .Register import *
-from .profile import *
-from .change_password import *
-from .forgot_password import *
+from .Login import * # noqa
+from .Register import * # noqa
+from .profile import *  # noqa
+from .change_password import *  # noqa E262
+from .forgot_password import *  # noqa

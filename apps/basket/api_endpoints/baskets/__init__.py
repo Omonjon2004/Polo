@@ -1,1 +1,1 @@
-from .views import BasketViewSet
+from .views import BasketViewSet # noqa F401
