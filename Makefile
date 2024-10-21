@@ -22,3 +22,5 @@ ist:
 	#make ins name=install_name
 test:
 	python3 manage.py test
+col:
+	python3 manage.py collectstatic

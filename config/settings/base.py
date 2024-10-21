@@ -111,12 +111,8 @@ if os.getenv('USE_SLS_DB')=='True':
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.getenv('DB_NAME'),
-            'PORT': os.getenv("DB_PORT"),
-            'HOST': os.getenv("DB_HOST"),
-            'USER': os.getenv("DB_USER"),
-            'PASSWORD': os.getenv("DB_PASS"),
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
