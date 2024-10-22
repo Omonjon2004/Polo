@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('apps.product.urls.v1')),
     path("api/account/v1/", include("apps.account.urls.v1")),
+    path("api/basket_item/", include("apps.basket.urls.v2")),
 ]
 urlpatterns += swagger_urlpatterns
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
