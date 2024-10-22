@@ -1,3 +1,3 @@
-from .add_card import *
-from .delete_card import *
-from .card_list import *
+from .add_card import *  # noqa F403
+from .delete_card import *  # noqa F403
+from .card_list import *  # noqa F403

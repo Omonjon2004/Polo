@@ -48,4 +48,5 @@ class BasketItemViewSet(viewsets.ModelViewSet):
 
         update_stock.delay(product_type, product_id, basket_item.quantity)
 
+
 __all__ = ['BasketItemViewSet']

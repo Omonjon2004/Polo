@@ -8,4 +8,5 @@ class BasketViewSet(viewsets.ModelViewSet):
     queryset = Basket.objects.all()
     serializer_class = BasketSerializer
 
+
 __all__ = ['BasketViewSet']
