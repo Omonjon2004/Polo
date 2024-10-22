@@ -16,19 +16,14 @@ class LoginSerializer(TokenObtainPairSerializer):
         try:
             user = Users.objects.get(email=email)
         except Users.DoesNotExist:
-            raise ValidationError(
-                detail="User with this email not found.",
-                code="email")
-
-        user = authenticate(email=email,
-                            password=password)
-        if user is None:
-            raise ValidationError(detail="Incorrect password.",
-                                  code="password")
+            raise ValidationError({"error": "User not found"})
 
         if not user.is_active:
-            raise ValidationError(detail="User account is not active.",
-                                  code="account_inactive")
+            raise ValidationError({"error": "This account is inactive"})
+
+        user = authenticate(username=email, password=password)
+        if not user:
+            raise ValidationError({"error": "Password is incorrect"})
 
         return super().validate(attrs)
 

@@ -13,23 +13,13 @@ class ProfileViewSet(viewsets.ViewSet):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
+
     @action(methods=["get"], detail=False)
     def user_profile(self, *args, **kwargs):
         account = Users.objects.get(pk=self.request.user.id)
         serializer = UserSerializer(account)
         return Response(serializer.data)
 
-    def partial_update(self, request, *args, **kwargs):
-        account = get_object_or_404(Users, pk=self.request.user.id)
-        original_email = account.email
-        serializer = UserSerializer(account, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        if ('email' in serializer.validated_data and
-                serializer.validated_data['email'] != original_email):
-            account.is_active = False
-
-        serializer.save()
-        return Response(serializer.data)
 
     def destroy(self, request, *args, **kwargs):
         account = get_object_or_404(Users, pk=self.request.user.id)
@@ -45,6 +35,4 @@ class ProfileViewSet(viewsets.ViewSet):
         account.is_active = False
         account.save()
         return Response(status=status.HTTP_200_OK)
-
-
-__all__ = ["ProfileViewSet", ]
+__all__ = ["ProfileViewSet",]
