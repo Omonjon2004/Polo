@@ -1,6 +1,3 @@
-from pickle import FALSE
-
-from django.template.context_processors import request
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
@@ -23,15 +20,6 @@ class ProfileViewSet(viewsets.ViewSet):
         serializer = UserSerializer(account)
         return Response(serializer.data)
 
-    def partial_update(self, request, *args, **kwargs):
-        account =get_object_or_404(Users, pk=self.request.user.id)
-        original_email = account.email
-        serializer = UserSerializer(account, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        if 'email' in serializer.validated_data and serializer.validated_data['email'] != original_email:
-            account.is_active = False
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
         account = get_object_or_404(Users, pk=self.request.user.id)

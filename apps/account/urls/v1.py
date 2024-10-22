@@ -2,11 +2,12 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from apps.account.api_endpoints import auth, activation, user_card
-from apps.account.api_endpoints.auth import ProfileViewSet, ChangePasswordViewSet
+from apps.account.api_endpoints.auth import ProfileViewSet, ChangePasswordViewSet, ProfileUpdateViewSet
 
 router = DefaultRouter()
 router.register(r'profile', ProfileViewSet, basename='profile')
 router.register(r'', ChangePasswordViewSet, basename='change-password')
+router.register(r'update_profile', ProfileUpdateViewSet, basename='update-profile')
 
 
 urlpatterns = [
