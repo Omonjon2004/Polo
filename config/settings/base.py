@@ -221,16 +221,16 @@ CACHES = {
 }
 
 
-# SIMPLE_JWT = {
-#     "TOKEN_OBTAIN_SERIALIZER":"account.api_endpoints.Login.serializers.LoginSerializer",
-#     "ACCESS_TOKEN_LIFETIME": timedelta(days=3),
-#     "REFRESH_TOKEN_LIFETIME": timedelta(weeks=1),
-# }
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#     ),
-#     'DEFAULT_PERMISSION_CLASSES': (
-#         'rest_framework.permissions.IsAuthenticated',
-#     )
-# }
+SIMPLE_JWT = {
+    "TOKEN_OBTAIN_SERIALIZER":"account.api_endpoints.Login.serializers.LoginSerializer",
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=3),
+    "REFRESH_TOKEN_LIFETIME": timedelta(weeks=1),
+}
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
