@@ -9,12 +9,22 @@ from apps.product.choices import (
     Dress_name_List, Jewelry_name_List,
     Jackets_name_List, Electrical_name_List,
     Shoes_name_List, Shoes_size_List,
-    Bags_name_List
 )
 from apps.shared.models import BaseProduct
 
 
 class Bags(BaseProduct):
+    Bags_name_List = (
+        ('HANDBAG', 'Handbag'),
+        ('Shoulder Bag', 'Shoulder Bag'),
+        ('Tote Bag', 'Tote Bag'),
+    )
+    Bags_Category_List = (
+        ('Leather', 'Leather'),
+        ('Fabric', 'Fabric'),
+        ('Synthetic', 'Synthetic'),
+    )
+
     name = models.CharField(max_length=100, choices=Bags_name_List)
     image = models.ImageField(upload_to='bags_images/')
     category = models.CharField(max_length=100, choices=Bags_Category_List)

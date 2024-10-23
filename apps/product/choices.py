@@ -199,23 +199,7 @@ Bags_Category_List = [
 ]
 
 
-Bags_name_List = [
-    ('Handbag', 'Handbag'),               # Kundalik foydalanish uchun qo'l sumkasi
-    ('Shoulder Bag', 'Shoulder Bag'),    # Yengil elga osiladigan sumka
-    ('Tote Bag', 'Tote Bag'),                # Katta va keng sumka
-    ('Backpack', 'Backpack'),                     # Oyoqdan osilgan sumka
-    ('Clutch', 'Clutch'),         # Rasmiy tadbirlar uchun kichik sumka
-    ('Crossbody Bag', 'Crossbody Bag'),           # Kesma va osiladigan sumka
-    ('Messenger Bag', 'Messenger Bag'),     # O'qituvchilar yoki ish uchun mo'ljallangan sumka
-    ('Weekend Bag', 'Weekend Bag'),       # Dam olish uchun mo'ljallangan sumka
-    ('Travel Bag', 'Travel Bag'),          # Sayohatlar uchun katta sumka
-    ('Laptop Bag', 'Laptop Bag'),          # Noutbuk uchun maxsus sumka
-    ('Diaper Bag', 'Diaper Bag'),         # Bolalar uchun mo'ljallangan sumka
-    ('Fanny Pack', 'Fanny Pack'),              # Belga osiladigan kichik sumka
-    ('Belt Bag', 'Belt Bag'),              # Kemerga osiladigan sumka
-    ('Bucket Bag', 'Bucket Bag'),         # Qop shaklida sumka
-    ('Gym Bag', 'Gym Bag'),           # Sport zaliga mo'ljallangan sumka
-]
+
 Jackets_Brand_List = [
     ('north_face', 'North Face'),
     ('patagonia', 'Patagonia'),
