@@ -1,75 +1,120 @@
 from django.db import models
 from django.forms import FloatField
 
-from apps.product.choices import (
-    Bags_Category_List, Dress_size_List,
-    Jewelry_Brand_List, Jewelry_Category_List,
-    Jackets_Brand_List, Jackets_Category_list,
-    Electrical_Brand_List, Electrical_Category_list,
-    Dress_name_List, Jewelry_name_List,
-    Jackets_name_List, Electrical_name_List,
-    Shoes_name_List, Shoes_size_List,
-)
+from apps.product.choices import (Dress_size_List,
+                                  Shoes_size_List,
+                                  )
 from apps.shared.models import BaseProduct
 
 
-class Bags(BaseProduct):
-    Bags_name_List = (
-        ('HANDBAG', 'Handbag'),
-        ('Shoulder Bag', 'Shoulder Bag'),
-        ('Tote Bag', 'Tote Bag'),
-    )
-    Bags_Category_List = (
-        ('Leather', 'Leather'),
-        ('Fabric', 'Fabric'),
-        ('Synthetic', 'Synthetic'),
-    )
+class Color(models.Model):
+    name = models.CharField(max_length=255)
 
-    name = models.CharField(max_length=100, choices=Bags_name_List)
+    def __str__(self):
+        return self.name
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class Brand(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class Bags(BaseProduct):
+    name = models.CharField(max_length=255, )
     image = models.ImageField(upload_to='bags_images/')
-    category = models.CharField(max_length=100, choices=Bags_Category_List)
+    color = models.ForeignKey(Color,
+                              on_delete=models.CASCADE,
+                              related_name='bags')
+    brand = models.ForeignKey(Brand,
+                              on_delete=models.CASCADE,
+                              related_name='bags')
+    category = models.ForeignKey(Category,
+                                 on_delete=models.CASCADE,
+                                 related_name='bags')
 
 
 class Shoes(BaseProduct):
-    name = models.CharField(max_length=100, choices=Shoes_name_List)
+    name = models.CharField(max_length=255, )
     size = models.IntegerField(choices=Shoes_size_List)
     image = models.ImageField(upload_to='shoes_images/')
+    color = models.ForeignKey(Color,
+                              on_delete=models.CASCADE,
+                              related_name='shoes')
+    brand = models.ForeignKey(Brand,
+                              on_delete=models.CASCADE,
+                              related_name='shoes')
+    category = models.ForeignKey(Category,
+                                 on_delete=models.CASCADE,
+                                 related_name='shoes')
 
 
 class Dress(BaseProduct):
-    name = models.CharField(max_length=100, choices=Dress_name_List)
+    name = models.CharField(max_length=255)
     size = models.CharField(max_length=5, choices=Dress_size_List)
     image = models.ImageField(upload_to='dress_images/')
+    color = models.ForeignKey(Color,
+                              on_delete=models.CASCADE,
+                              related_name='dress')
+    brand = models.ForeignKey(Brand,
+                              on_delete=models.CASCADE,
+                              related_name='dress')
+    category = models.ForeignKey(Category,
+                                 on_delete=models.CASCADE,
+                                 related_name='dress')
 
 
 class Jewelry(BaseProduct):
-    name = models.CharField(max_length=100, choices=Jewelry_name_List)
+    name = models.CharField(max_length=255, )
     weight = FloatField()
     image = models.ImageField(upload_to='jewelry_images/')
     size = models.DecimalField(max_digits=5, decimal_places=2)
     composition = models.DecimalField(max_digits=5,
                                       decimal_places=2,
-                                      default=None)  # probasi uchun uzuklarni
-    brand = models.CharField(max_length=100,
-                             choices=Jewelry_Brand_List,
-                             blank=True, null=True)
-    category = models.CharField(max_length=100,
-                                choices=Jewelry_Category_List,
-                                blank=True, null=True)
+                                      default=None)
+    color = models.ForeignKey(Color,
+                              on_delete=models.CASCADE,
+                              related_name='jewelry')
+    brand = models.ForeignKey(Brand,
+                              on_delete=models.CASCADE,
+                              related_name='jewelry')
+    category = models.ForeignKey(Category,
+                                 on_delete=models.CASCADE,
+                                 related_name='jewelry')
 
 
 class Jackets(BaseProduct):
-    name = models.CharField(max_length=100, choices=Jackets_name_List)
-    brand = models.CharField(max_length=50,
-                             choices=Jackets_Brand_List, blank=True, null=True)
+    name = models.CharField(max_length=255, )
     image = models.ImageField(upload_to='jackets_images/')
-    category = models.CharField(max_length=255, choices=Jackets_Category_list)
     size = models.CharField(max_length=5, choices=Dress_size_List)
+    color = models.ForeignKey(Color,
+                              on_delete=models.CASCADE,
+                              related_name="jackets")
+    brand = models.ForeignKey(Brand,
+                              on_delete=models.CASCADE,
+                              related_name='jackets')
+    category = models.ForeignKey(Category,
+                                 on_delete=models.CASCADE,
+                                 related_name='jackets')
 
 
 class Electrical(BaseProduct):
-    name = models.CharField(max_length=100, choices=Electrical_name_List)
-    brand = models.CharField(max_length=50, choices=Electrical_Brand_List)
+    name = models.CharField(max_length=255)
     image = models.ImageField(upload_to='electrical_images/')
-    category = models.CharField(max_length=255,
-                                choices=Electrical_Category_list)
+    color = models.ForeignKey(Color,
+                              on_delete=models.CASCADE,
+                              related_name='electrical')
+    category = models.ForeignKey(Category,
+                                 on_delete=models.CASCADE,
+                                 related_name='electrical')
+    brand = models.ForeignKey(Brand,
+                              on_delete=models.CASCADE,
+                              related_name='electrical')
