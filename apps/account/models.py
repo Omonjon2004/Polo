@@ -13,7 +13,7 @@ class Users(AbstractUser):
     gender = models.CharField(choices=Gender_List, max_length=20)
     email = models.EmailField(unique=True)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['phone_number']
+    REQUIRED_FIELDS = ['username']
 
     def __str__(self):
         return self.get_full_name()
