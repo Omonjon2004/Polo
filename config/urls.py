@@ -18,13 +18,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from .swagger import swagger_urlpatterns
+from graphene_django.views import GraphQLView
+
+from config.swagger import swagger_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('apps.product.urls.v1')),
     path("api/account/v1/", include("apps.account.urls.v1")),
     path("api/basket_item/", include("apps.basket.urls.v2")),
+    path("graphql/", GraphQLView.as_view(graphiql=True)),
 ]
 urlpatterns += swagger_urlpatterns
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -56,10 +56,16 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'drf_yasg',
     'rest_framework_simplejwt',
+     "graphene_django",
 
 ]
 
 INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
+
+GRAPHENE = {
+    "SCHEMA": "apps.product.graphql.schema.schema"
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -231,6 +237,6 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'config.permissions.IsSuperUser',
     )
 }
